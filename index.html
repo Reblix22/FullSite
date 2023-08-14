@@ -3,4 +3,30 @@
 <input id="webhook" placeholder="Url del WebHook">
 <input id="msg" placeholder="Mensaje">
 <input id="username" placeholder="Nombre del Webhook">
+<button id="button">Send Message</button>
 </body>
+<script>
+document.getElementById("button").addEventListener("click",function(){
+let webhook = document.getElementById("webhook").value
+let msg = document.getElementById("msg").value
+let username = document.getElementById("username").value
+
+if(webhook && msg && username){
+sendMessage(webhook,msg,username)
+}
+
+function sendMessage(webhook,msg,username){
+const requestData = {
+content : msg,
+username : username
+}
+fetch(webhook, {
+method : "POST",
+headers : {
+"content-type":"application/json"
+},
+body : JSON.stringfy(requestData)
+})
+}
+})
+</script>
